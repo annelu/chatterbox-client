@@ -14,7 +14,8 @@ $(document).ready(function() {
         $(".msgStream").html("");
         for (var i = 0; i < 19; i++) {
           var user = escapeStr(data.results[i].username);
-          var message =  escapeStr(' (' + data.results[i].createdAt.slice(0, 10) + " "+ data.results[i].createdAt.slice(11, 19) + ') : ' + data.results[i].text);
+          var message = escapeStr(' (' + data.results[i].createdAt.slice(0, 10) + " "+ data.results[i].createdAt.slice(11, 19) + ') : ' + data.results[i].text);
+          message = message.slice(0, 140);
           if (friends[user]) {
             message = '<b>' + message + '</b>';
           }
