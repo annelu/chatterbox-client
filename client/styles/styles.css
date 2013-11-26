@@ -18,3 +18,16 @@ body {
     margin-top: 0;
     font-size: 35px;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.msg {
+    width: 400px;
+    height: 20px;
+}
+
+.inputBox {
+    text-align: center;
+}
