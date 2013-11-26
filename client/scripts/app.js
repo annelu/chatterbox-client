@@ -1,6 +1,7 @@
 // YOUR CODE HERE:
 $(document).ready(function() {
   var username = $(location).attr('href').split('=')[1];
+  var friends = {};
 
   var fetchData = function(roomname) {
     $.ajax({
@@ -12,13 +13,23 @@ $(document).ready(function() {
         console.log(data);
         $(".msgStream").html("");
         for (var i = 0; i < 19; i++) {
-          var message = '<li>' + escapeStr(data.results[i].username + ' (' +data.results[i].createdAt.slice(0, 10) + " "+ data.results[i].createdAt.slice(11, 19) + ') : ' + data.results[i].text) + '</li>';
+          var user = escapeStr(data.results[i].username);
+          var message =  escapeStr(' (' + data.results[i].createdAt.slice(0, 10) + " "+ data.results[i].createdAt.slice(11, 19) + ') : ' + data.results[i].text);
+          if (friends[user]) {
+            message = '<b>' + message + '</b>';
+          }
           if (!roomname) {
-            $(".msgStream").append(message);
+            $(".msgStream").append('<li> <span class=user id=' + user +  '>' + user + '</span>' + message + '</li>');
+          } else if (data.results[i].roomname === roomname) {
+            $(".msgStream").append('<li> <span class=user id=' + user +  '>' + user + '</span>' + message + '</li>');
           }
-          if (data.results[i].roomname === roomname) {
-            $(".msgStream").append(message);
-          }
+          $('.user').on("click", function(){
+            console.log('clicking on user is working');
+            var userId = $(this).attr('id');
+            if (!friends[userId]) {
+              friends[userId] = userId;
+            }
+          });
         }
       },
 
@@ -61,6 +72,9 @@ $(document).ready(function() {
     $('.msg').val("");
   });
 
-  setInterval(function() { var roomname = $('.room').val(); fetchData(roomname); }, 1000);
+  setInterval(function() {
+    var roomname = $('.room').val();
+    fetchData(roomname);
+  }, 1000);
 
 });
