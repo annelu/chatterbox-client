@@ -1,6 +1,13 @@
 // YOUR CODE HERE:
 $(document).ready(function() {
+  fetchData();
   var username = $(location).attr('href').split('=')[1];
+  $(".sendButton").on("click", function() {
+    sendData(username);
+  });
+
+});
+
   var friends = {};
 
   var fetchData = function(roomname) {
@@ -10,7 +17,6 @@ $(document).ready(function() {
       dataType: 'json',
       contentType: 'application/json',
       success: function(data) {
-        console.log(data);
         $(".msgStream").html("");
         for (var i = 0; i < 19; i++) {
           var user = escapeStr(data.results[i].username);
@@ -41,7 +47,10 @@ $(document).ready(function() {
     });
   };
 
-  var sendData = function(username, message, roomname) {
+  var sendData = function(username) {
+    var message = $('.msg').val();
+    var roomname = $('.room').val();
+    $('.msg').val("");
     $.ajax({
       url: 'https://api.parse.com/1/classes/chatterbox',
       type: 'POST',
@@ -67,16 +76,9 @@ $(document).ready(function() {
     return li.innerHTML;
   };
 
-  $(".sendButton").on("click", function() {
-    var message = $('.msg').val();
-    var roomname = $('.room').val();
-    sendData(username, message, roomname);
-    $('.msg').val("");
-  });
+
 
   setInterval(function() {
     var roomname = $('.room').val();
     fetchData(roomname);
   }, 1000);
-
-});
