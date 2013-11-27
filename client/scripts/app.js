@@ -3,11 +3,7 @@ $(document).ready(function() {
   var messages = new Messages();
   var username = $(location).attr('href').split('=')[1];
 
-  messages.fetchData(username);
-
-  $(".sendButton").on("click", function() {
-    messages.sendData(username);
-  });
+  new newMessageSendView(username, messages);
 
   $('body').on("click", '.user', function(e){
     var userId = e.target.id;
@@ -15,7 +11,7 @@ $(document).ready(function() {
       messages.friends[userId] = userId;
     }
   });
-
+  messages.fetchData(username);
   messages.refresh();
 
 });
@@ -99,3 +95,9 @@ Messages.prototype.refresh = function() {
     var roomname = $('.room').val();
     that.fetchData(roomname);
   }, 1000); };
+
+var newMessageSendView = function(username, that){
+  $(".sendButton").on("click", function() {
+    that.sendData(username);
+  });
+};
