@@ -45,10 +45,19 @@ body {
     position: fixed;
 }
 
+#clock {
+    font-size: 20px;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+#settings img {
+    width: 100px;
+    height: 100px;
 }
 
 .msg {

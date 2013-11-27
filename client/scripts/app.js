@@ -5,6 +5,16 @@ $(document).ready(function() {
 
   new newMessageSendView(username, messages);
 
+
+$('[type=file]').on('change', function () {
+ var reader = new FileReader()
+        reader.readAsDataURL(this.files[0]) ;
+
+        reader.onloadend = function (e) {
+         var img = e.target.result
+         console.log(img)
+        }
+})
   $('body').on("click", '.user', function(e){
     var userId = e.target.id;
     if (!messages.friends[userId]) {
