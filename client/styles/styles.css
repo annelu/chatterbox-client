@@ -23,15 +23,26 @@ body {
 }
 
 #friends {
-    display: inline-block;
     background-color: #FFFFFF;
     margin: 0 auto;
     width: 200px;
-    font-size: 35px;
+    font-size: 25px;
     border: solid #ddd;
     border-width: 0 1px 1px 1px;
-    position: fixed;
+}
+
+#settings {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    width: 200px;
+    font-size: 25px;
+    border: solid #ddd;
+    border-width: 0 1px 1px 1px;
+}
+
+#sideBar {
     top: 8px;
+    position: fixed;
 }
 
 ul {

@@ -89,11 +89,30 @@ Messages.escapeStr = function(str){
   return li.innerHTML;
 };
 
+var refreshClock = function() {
+  var currentTime = new Date();
+  var currentSeconds = currentTime.getSeconds();
+  var currentMinutes = currentTime.getMinutes();
+  var currentHours = currentTime.getHours();
+  var timePeriod = (currentHours >= 12) ? "pm" : "am";
+
+  currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+  currentHours = (currentHours === 0) ? 12 : currentHours;
+
+  currentMinutes = (currentMinutes < 10) ? "0" + currentMinutes : currentMinutes;
+
+  var time = currentHours + ":" + currentMinutes + timePeriod;
+
+  $("#clock").text("");
+  $("#clock").append("<p>" + time + "</p>");
+}
+
 Messages.prototype.refresh = function() {
   var that = this;
   setInterval(function() {
     var roomname = $('.room').val();
     that.fetchData(roomname);
+    refreshClock();
   }, 1000); };
 
 var newMessageSendView = function(username, that){
