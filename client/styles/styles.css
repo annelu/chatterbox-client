@@ -2,9 +2,11 @@ body {
     background: #eee;
     text-align: center;
     padding: 0 25px;
+    font-family: sans-serif;
 }
 
 #main {
+    display: inline-block;
     width: 500px;
     margin: auto;
     text-align: left;
@@ -12,22 +14,78 @@ body {
     padding: 50px 60px;
     border: solid #ddd;
     border-width: 0 1px 1px 1px;
+    top: 10px;
 }
 
 #main h1 {
-    margin-top: 0;
     font-size: 35px;
+    color: #454545;
+}
+
+#friends {
+    display: inline-block;
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    width: 200px;
+    font-size: 35px;
+    border: solid #ddd;
+    border-width: 0 1px 1px 1px;
+    position: fixed;
+    top: 8px;
 }
 
 ul {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .msg {
     width: 400px;
     height: 20px;
+    border: 1px dotted gray;
+    background-color: #D6D6D6;
+    position: relative;
+    right: 11px;
+}
+
+.room {
+    float: right;
+    margin: 10px;
+}
+
+.sendButton {
+    background-color: #E8E8E8;
+    margin: 0 10px;
+    width: 50px;
+    height: 20px;
+}
+
+.sendButton:hover {
+    background-color: #CFCFCF;
 }
 
 .inputBox {
     text-align: center;
+    padding: 20px 0 10px 0;
+}
+
+.user {
+    color: #697C96;
+}
+
+.user:hover {
+    cursor: pointer;
+    color: #EB3657;
+}
+
+.fri {
+    font-size: 12px;
+    border-size: 5px 0;
+    margin: 0 auto;
+
+}
+
+#me {
+    color: #5C915A;
 }

@@ -14,15 +14,20 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
-    <div id="main">
-      <h1>Chat-Client</h1>
-      <div class="inputBox">
-        <input class="room" type="text" placeholder="Room name" value="test"/>
-        <input class="msg" type="text" placeholder="Enter your message here."/>
-        <input class="sendButton" type="button" value="Send"/>
+    <div id="container">
+      <div id="main">
+        <h1>Chat-Client</h1>
+        <input class="room" type="text" placeholder="Room name"/>
+        <div class="inputBox">
+          <input class="msg" type="text" placeholder="Enter your message here."/>
+          <input class="sendButton" type="button" value="Send"/>
+        </div>
+        <ul class="msgStream">
+        </ul>
       </div>
-      <ul class="msgStream">
-      </ul>
+      <div id="friends">friends
+        <ul id="friendslist"></ul>
+      </div>
     </div>
 
   </body>

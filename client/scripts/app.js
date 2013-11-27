@@ -1,8 +1,9 @@
 // YOUR CODE HERE:
 $(document).ready(function() {
   var messages = new Messages();
-  messages.fetchData();
   var username = $(location).attr('href').split('=')[1];
+
+  messages.fetchData(username);
 
   $(".sendButton").on("click", function() {
     messages.sendData(username);
@@ -31,7 +32,7 @@ Messages.prototype.fetchData = function(roomname) {
     dataType: 'json',
     contentType: 'application/json',
     success: function(data) {
-      $(".msgStream").html("");
+      $(".msgStream").text("");
       for (var i = 0; i < 19; i++) {
         var user = Messages.escapeStr(data.results[i].username);
         var message = Messages.escapeStr(' (' + data.results[i].createdAt.slice(0, 10) + " "+ data.results[i].createdAt.slice(11, 19) + ') : ' + data.results[i].text);
@@ -40,11 +41,19 @@ Messages.prototype.fetchData = function(roomname) {
         if (that.friends[user]) {
           message = '<b>' + message + '</b>';
         }
+        if ($(location).attr('href').split('=')[1] === user) {
+          user = 'me';
+        }
         if (!roomname) {
           $(".msgStream").append('<li> <span class=user id=' + user +  '>' + user + '</span>' + message + '</li>');
         } else if (data.results[i].roomname === roomname) {
           $(".msgStream").append('<li> <span class=user id=' + user +  '>' + user + '</span>' + message + '</li>');
         }
+        $('#friendslist').text('');
+        for (var friend in that.friends) {
+          $('#friendslist').append('<li> <span class=fri>'+ friend + '</span></li>');
+        }
+
       }
     },
 
@@ -88,5 +97,5 @@ Messages.prototype.refresh = function() {
   var that = this;
   setInterval(function() {
     var roomname = $('.room').val();
-    that.fetchData(roomname, that);
+    that.fetchData(roomname);
   }, 1000); };
